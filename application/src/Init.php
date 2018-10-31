@@ -1,6 +1,6 @@
 <?php
 namespace Application\Source;
 
-require 'Router.php';
-Router::init();
- ?>
+require 'RouterClass.php';
+
+RouterClass::init();

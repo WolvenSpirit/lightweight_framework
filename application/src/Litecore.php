@@ -12,6 +12,6 @@ trait Torch
 interface Appcore
 {
   public function loadView($view);
-  public function loadModel($model);
-  public function loadController($controller);
+  # public function loadModel($model);
+  # public function loadController($controller);
 }
