@@ -22,19 +22,31 @@ class RouterClass
     # Detects the url that is trying to be accesed and checks the $route array for the matching key.
   foreach ($this->route as $route_key => $action)
     {
+     $class_select = $action[0];
+     $controller_full_path = dirname(__DIR__).'/controllers/'.$class_select;
+     $method = $action[1];
+     include $controller_full_path;
+    
       if($_SERVER['REQUEST_URI'] == $route_key)
       {
         try
-        {
-          
-          $class_select = $action[0];
-          $method = $action[1];
+        {       
           $class_select::$method();
-          
         }
         catch (\Exception $e)
         {
-          $e->getMessage();
+          if($_SERVER['PHP_SELF'] == $route_key)
+          {
+            try
+            {
+            $class_select::$method();
+            }
+            catch(\Exception $e)
+            {
+              $e->getMessage(); # DEBUG only, will return a generic error view.
+            }
+          }
+          $e->getMessage(); # DEBUG only, will return a generic error view.
         }
       }
     }
