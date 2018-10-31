@@ -3,29 +3,33 @@ namespace Application\Source;
 
 # The public index will require this file first,
 
-### Fetch rules ###############################################################
+/*
+* ROUTER FILE
+*/
 class RouterClass
 {
+  protected $route;
+  
   public static function init()
-  {
-  # $route = json_decode(file_get_contents("/home/wolven/Desktop/Litecore/application/src/router.json"));
-
-    $route = array(
+  { 
+    # Enter your routes into the array below. 
+    # Relative url path as key => an array containing controller and method as its value.
+    $this->route = array(
       "/" => array('MainController', 'index');
     );
 
 
-### Detect the url that is trying to be accesed and see if you have the same key stored.
-
-  foreach ($route as $key => $action)
+    # Detects the url that is trying to be accesed and checks the $route array for the matching key.
+  foreach ($this->route as $route_key => $action)
     {
-      if($_SERVER['REQUEST_URI'] == $key)
+      if($_SERVER['REQUEST_URI'] == $route_key)
       {
         try
         {
-           # require dirname(__DIR__)."/views/default_view.php"; # DEBUG
+          
           $class_select = $action[0];
           $method = $action[1];
+          $class_select::$method();
           
         }
         catch (\Exception $e)
