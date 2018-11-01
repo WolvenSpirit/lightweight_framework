@@ -1,3 +1,3 @@
 <?php
-echo "Second path.";
+echo $_SESSION['data'];
  ?>
