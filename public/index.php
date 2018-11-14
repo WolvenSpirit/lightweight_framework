@@ -8,4 +8,5 @@
   # load src
   require dirname(__DIR__).'/application/src/Init.php';
 ?>
+  </div>
 </html>
