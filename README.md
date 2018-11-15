@@ -9,3 +9,5 @@ people go up against when building an mvc framework.
 
 By the end of this I do intend to make it safe enough 
 to be used for a blog site or other things of that scale. 
+ 
+ Update: Recently I have been reading on Hack and HHVM and this project may either fork into a Hack one, that version being the main, and this one following behind it.
