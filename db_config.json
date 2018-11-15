@@ -1,9 +1,0 @@
-{
-  "connection":{
-                "driver":"mysql",
-                "host":null,
-                "dbname":"db01",
-                "username":"wolf",
-                "password":"darkking"
-              }
-}
