@@ -21,17 +21,17 @@ Class PDO_mysql_conn
   }
 
   public function select($table,$column)
-  { ### BELOW THIS LINE ~~~~~~~~~~~~~~~ TO BE RE-WRITTEN ~~~~~~~~~~~~~~~~
+  {
         if(null != $column)
         {
-          echo var_dump($column);
           if(is_array($column))
           {
             try
             {
-                $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE $column[0] = ?");
-                $stmt->bindParam('s', $column[1]);
-                $stmt->execute();
+                $q = "SELECT * FROM $table WHERE $column[0] = ?";
+                # die($q); # DEBUG
+                $stmt = $this->pdo->prepare($q);
+                $stmt->execute([$column[1]]);
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (\PDOException $e)

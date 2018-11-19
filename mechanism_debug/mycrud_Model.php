@@ -1,15 +1,17 @@
 <?php
 require_once("BaseModel.php"); // Edit the path.
+
+/**
+ * Declare table name/model class (should be same) in the init static call.
+ */
+
 Class mycrud extends BaseModel
 {
-    /**
-     * Declare table name/model class (should be same) in the init static call.
-     */
 
     /*
     * Declare all columns in the table.
     */
-    protected $title;
+    protected $title = 'title';
     protected $body;
     protected $extra;
 }
@@ -17,7 +19,7 @@ Class mycrud extends BaseModel
 # TEST DEBUG ~ mapping currently functional ~
 $debugv = new mycrud();
 $debugv->init();
-$result = $debugv->select();
+$result = $debugv->select(['title'=>'Lorem']);
 foreach ($result as $elem) {
   print($elem['title']." : ".$elem['body']."</br>");
 }

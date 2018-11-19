@@ -31,6 +31,8 @@
     $this->model = get_class($this);
     $this->columns = get_class_vars($this->model); // Should return array.
 
+    # die(var_dump($this->columns)); # DEBUG
+
     switch($this->cfg->connection->driver)
     {
         case 'mysql' || 'mysqli':
@@ -55,9 +57,9 @@
         {
           return $this->con_object->select($this->model, null);
         }
-        else if(in_array($column[0], $this->columns))
+        else if(property_exists($this->model, key($column)))
         {
-          return $this->con_object->select($this->model,array($column[0],$column[1]));
+          return $this->con_object->select($this->model,array(key($column),$column[key($column)]));
         }
         else
         {
