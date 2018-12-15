@@ -1,97 +1,95 @@
 <?php
+namespace Application\Source;
 
-function match_return($v_arr,$user_input)
-{
-  foreach ($v_arr as $v_name => $v_value)
-  {
-    if($v_name == $user_input)
-    {
-      return $v_name; # To be used when each v is also an array or you plan to use it in some way.
-    }
-    else
-    {
-      die("Provided input could not be found in the tables declarations list![match_return]");
-    }
-  }
-}
-
-function v_matching($v_arr,$user_input)
-{
-  foreach ($v_arr as $k => $v)
-  {
-    if($k == $user_input)
-    {
-      return True;
-    }
-    else
-    {
-      die("Provided input could not be found in the tables declarations list![v_matching] Your input was $user_input.");
-    }
-  }
-}
-
-class BaseModel
+ class BaseModel
 {
   protected $cfg;
+  public $model;
   protected $pdo;
+  public $columns;
+  protected $current_mode;
+  public $con_object;
+  /**
+  * Declare the used db conn mechanism's class name in driver classes. Class files should be available in db_conn folder.
+  */
+  protected $driver_classes = ['mysql_class'=>'PDO_mysql_conn','postgresql_class'=>'PDO_postgresql_conn'];
   public function __construct()
   {
+
     try {
-      $this->cfg = json_decode(file_get_contents(dirname(__DIR__)."/db_config.json"));
+      $this->cfg = json_decode(file_get_contents("/home/wolven/Desktop/ws_fw_php/application/db_config.json"));
+      if($this->cfg !=null)
+      {
+        return True;
+      }
     } catch (\Exception $e) {
-      echo "Failed to open db config file.<\ br>";
-      $e->getMessage();
+      echo "Failed to open db config file.<\ br> ".$e->getMessage();
     }
+
   }
-  public function init()
+  public function init(?string $modelx = null) :bool
   {
+    // This is important, the user model will always inherit from basemodel
+    // and it will ::init its inherited method providing his class name,
+    // it should also contain the column fields as properties.
+    // This acts as a rudimentary ORM as it maps the table and columns that exist in the db
+    // if the model class name and properties provided by the user match up.
+    if($modelx != null) # This override is mainly for debugging the BaseModel
+    {
+      $this->model = $modelx;
+    }
+    else
+    {
+      $this->model = get_class($this);
+    }
+
+    $this->columns = get_class_vars($this->model); // Should return array.
+
+    $this->model = str_replace("Application\Model\\",null,$this->model); // fix
+
+
+    # die(var_dump($this->columns)); # DEBUG
+
     switch($this->cfg->connection->driver)
     {
         case 'mysql' || 'mysqli':
-          $this->pdo = new PDO(
-            "mysql:host=".$this->cfg->connection->host.";
-            dbname=".$this->cfg->connection->dbname,
-            $this->cfg->connection->username,
-            $this->cfg->connection->password
-          );
+          require_once(dirname(__DIR__).'/src/db_con/PDO_conn_mysql.php');
+          try{
+          $this->con_object = new $this->driver_classes['mysql_class']($this->cfg);
+          return True;
+        }catch(\Exception $e)
+        {
+            printf($e->getMessage());
+        }
           break;
         case 'posgres' || 'postgresql':
-          die("posgresql to be implemented, sorry.");
+          die("posgresql to be implemented, sorry. Not big on waiting? write your own and place it along with the other db_conn classes.");
           break;
         default:
             print($this->cfg->connection->driver." isn't supported.");
     }
   }
-  public function select($table,$q=NULL)
+  public function select(array $column = null)
   {
-    switch($this->cfg->connection->driver)
+    if($this->cfg->connection->driver == 'mysql' || $this->cfg->connection->driver == 'mysqli' )
     {
-      case 'mysql':
-        if($q!=null)
-        {
-          if(is_array($q) && v_matching($this->cfg->tables,$table) == True && v_matching(match_return($this->cfg->tables,$table),$q[0]) == True)
-          { # The above checks if all args are mapped in the config json file.
-            try
-            {
+      if($this->con_object != null)
+      {
 
-                $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE $q[0] = ?");
-                $stmt->execute($q[1]);
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                return $result;
-            } catch (\PDOException $e)
-            {
-                print($e->getMessage());
-            }
-          }
+        if(is_null($column))
+        {
+          return $this->con_object->select($this->model, null);
         }
-        break;
-      default:
-          print($this->cfg->connection->driver." isn't supported.");
+        else if(property_exists($this->model, key($column)))
+        {                                                         // column name : value
+          return $this->con_object->select($this->model,array(key($column),$column[key($column)]));
+        }
+        else
+        {
+          echo "Supplied column doesn't appear to exist in the declared table.";
+          return False;
+        }
+      }
     }
   }
 }
-#// DEBUG:
-$bugsquasher = new BaseModel;
-$bugsquasher->init();
-$bugsquasher->select("mycrud",array("title","First"));
- ?>

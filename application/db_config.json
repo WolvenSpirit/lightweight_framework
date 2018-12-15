@@ -5,9 +5,5 @@
                 "dbname":"db01",
                 "username":"wolf",
                 "password":"darkking"
-              },
-"tables":
-          {
-            "mycrud":["title","body"]
-          }
+              }
 }

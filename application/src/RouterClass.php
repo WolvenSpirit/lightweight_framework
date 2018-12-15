@@ -14,7 +14,8 @@ class RouterClass
     # Relative url path as key => an array containing controller and method as its value.
     $route = array(
       "/" => array('MainController', 'index'),
-      "/home" => array('MainController', 'home')
+      "/home" => array('MainController', 'home'),
+      "/foo" => array('MainController', 'foo')
     );
 
 

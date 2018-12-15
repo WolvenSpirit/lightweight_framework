@@ -1,6 +1,6 @@
 <?php
-echo $_SESSION['var2'];
-
 require $_SESSION['cache'];
-Cache::load('var2');
+$data = Cache::load('data');
+  echo var_dump($data);
+
  ?>
