@@ -28,7 +28,6 @@ class mycrudTest extends TestCase
     $this->x->select(array('title'=>'Lorem'));
     // This was the BIG obvious fail.
     // The flow relies on get_class php function which returns too much if it is namespaced.
-    // $this->assertEquals($y,'mycrud'); <---/
     $this->assertEquals($this->x->model,'mycrud'); // translates correctly now
     # $this->assertEquals($this->x->columns,['columns']);
   }
@@ -38,5 +37,19 @@ class mycrudTest extends TestCase
     $this->x->init();
     $this->assertNotEmpty($this->x->con_object);
     $this->assertTrue(is_object($this->x->con_object));
+  }
+  public function testTableSelectReturnsArray()
+  {
+    $this->x = new \Application\Model\mycrud();
+    $this->x->init();
+    $result = $this->x->select(array('title'=>'Lorem')); # Replace with existing column in your database.
+    $this->assertInternalType('array',$result);
+  }
+  public function testTableSelectReturnedArrayNotEmpty()
+  {
+    $this->x = new \Application\Model\mycrud();
+    $this->x->init();
+    $result = $this->x->select(array('title'=>'Lorem')); # Replace with existing column in your database.# Not very dry...
+    $this->assertNotEmpty($result);
   }
 }

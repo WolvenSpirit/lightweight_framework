@@ -19,9 +19,7 @@ class BaseController extends CacheVar # if it implements an interface it can no 
             foreach($data as $k => $v)
             {
               $_SESSION[$k] = $v;
-            }
-            $_SESSION['data'] = $data; # the raw array
-
+            } # Be a caveman and var_dump it if you can't find what you expect.
             # this will be replaced with a file which will cache this variable
             # The view will include a class which will return the variable.
             # php session doesn't return the data on first refresh.. due to cookie storage?

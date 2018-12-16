@@ -24,13 +24,13 @@ class MainController extends BaseController
 
   public function foo()
   {
-
-    # TEST DEBUG ~ mapping currently functional ~ This will be called from controller, the model will only represent the table.
-
     $debugv = new mycrud();
     $debugv->init();
     $result = $debugv->select(['title'=>'Lorem']);
-    var_dump($result);
-    self::loadView('default_view_2.php',array('data'=>$result));
+    # var_dump($result);
+    # loadView stores data in $_SESSION array.
+    self::loadView('getArticle.php',array('data'=>$result,'page_title'=>'Selected articles'));
+    # to json cache to load from there as well.
+    # self:save(array('data'=>$result));
   }
 }

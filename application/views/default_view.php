@@ -1,8 +1,9 @@
 <?php
-echo "<h3>Litecore</h3>";
-
-  foreach ($_SESSION['data'] as $elem) {
-    var_dump($_SESSION['data']);
-
-}
+include_once('includes/header.php');
  ?>
+<div class="container">
+<h3>default_view</h3>
+</div>
+ <?php
+ include_once('includes/footer.php');
+  ?>

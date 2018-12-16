@@ -69,19 +69,20 @@ namespace Application\Source;
             print($this->cfg->connection->driver." isn't supported.");
     }
   }
-  public function select(array $column = null)
+  public function select(array $column = null) :array
   {
     if($this->cfg->connection->driver == 'mysql' || $this->cfg->connection->driver == 'mysqli' )
     {
-      if($this->con_object != null)
+      if($this->con_object != null) // @works
       {
 
         if(is_null($column))
         {
           return $this->con_object->select($this->model, null);
         }
-        else if(property_exists($this->model, key($column)))
-        {                                                         // column name : value
+        else if(is_array($column)) // @works
+        {
+          # die(var_dump(key($column))." <br>".var_dump($column[key($column)])); # DEBUG breakpoint                                                        // column name : value
           return $this->con_object->select($this->model,array(key($column),$column[key($column)]));
         }
         else
