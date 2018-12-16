@@ -15,7 +15,8 @@ class RouterClass
     $route = array(
       "/" => array('MainController', 'index'),
       "/home" => array('MainController', 'home'),
-      "/getArticle" => array('MainController', 'foo')
+      "/getArticle" => array('MainController', 'foo'),
+      "/insert" => array('MainController', 'insert_debug')
     );
 
 

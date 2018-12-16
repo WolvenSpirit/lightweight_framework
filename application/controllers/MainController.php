@@ -33,4 +33,8 @@ class MainController extends BaseController
     # to json cache to load from there as well.
     self::save(array('data'=>$result));
   }
+  public function insert_debug()
+  {
+    // ... will load a form
+  }
 }

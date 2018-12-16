@@ -3,7 +3,7 @@ namespace Application\Source;
 
 
 Class CacheVar
-{ # A different class should provide this utility to views.
+{ # A different class ~should~/does(loadcache.php) provide this utility to views.
 
   public static function save(array $arr_arg)
   {

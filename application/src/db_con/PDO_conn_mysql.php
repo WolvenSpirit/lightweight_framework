@@ -20,7 +20,7 @@ Class PDO_mysql_conn
     return $this->pdo; // return the obj to perform manual queries.
   }
 
-  public function select($table,$column)
+  public function select($table,$column): array
   {
         if(null != $column)
         {
@@ -46,6 +46,28 @@ Class PDO_mysql_conn
           $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           return $result;
         }
+  }
+      # INFO - $columns == $properties == $entity_properties == $column_properties - sometimes in different filtered states.
+  public function insert(string $table, array $data,array $columns_properties): bool
+  {
+    if($table != null && $data != null)
+    {
+      if(is_array($data) && is_string($table))
+      {
+        try
+          {
+            $columns = implode(',', $columns_properties);
+          $query = "INSERT INTO $table ($columns) VALUES (?, ?, ?)";
+          $stmt= $this->pdo->prepare($query);
+          $stmt->execute($data);
+          return True;
+          }
+          catch(\PDOException $e)
+          {
+            printf($e->getMessage());
+          }
+      }
+    }
   }
 }
  ?>

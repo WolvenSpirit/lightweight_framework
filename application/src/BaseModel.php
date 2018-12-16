@@ -3,16 +3,16 @@ namespace Application\Source;
 
  class BaseModel
 {
-  protected $cfg;
-  public $model;
-  protected $pdo;
-  public $columns;
-  protected $current_mode;
-  public $con_object;
+  private $cfg;
+  private $model;
+  private $pdo;
+  private $columns;
+  private $current_mode;
+  private $con_object;
   /**
   * Declare the used db conn mechanism's class name in driver classes. Class files should be available in db_conn folder.
   */
-  protected $driver_classes = ['mysql_class'=>'PDO_mysql_conn','postgresql_class'=>'PDO_postgresql_conn'];
+  private $driver_classes = ['mysql_class'=>'PDO_mysql_conn','postgresql_class'=>'PDO_postgresql_conn'];
   public function __construct()
   {
 
@@ -90,6 +90,26 @@ namespace Application\Source;
           echo "Supplied column doesn't appear to exist in the declared table.";
           return False;
         }
+      }
+    }
+  }
+  public function insert(array $entity_properties,array $data)
+  {
+    if($this->cfg->connection->driver == 'mysql' || $this->cfg->connection->driver == 'mysqli')
+    {
+      if($this->con_object != null) # Verify that we have the pdo object.
+      {
+        if($this->con_object->insert($this->model, $data, $entity_properties) == True)
+        {
+          # echo "DEBUG - Done.";
+          return True;
+        }
+
+      }
+      else
+      {
+        echo "Something went wrong when trying to init the insert method @PDO_conn_mysql";
+        return False;
       }
     }
   }
