@@ -31,6 +31,6 @@ class MainController extends BaseController
     # loadView stores data in $_SESSION array.
     self::loadView('getArticle.php',array('data'=>$result,'page_title'=>'Selected articles'));
     # to json cache to load from there as well.
-    # self:save(array('data'=>$result));
+    self::save(array('data'=>$result));
   }
 }

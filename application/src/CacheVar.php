@@ -1,18 +1,11 @@
 <?php
 namespace Application\Source;
 
-trait Torch
-{
-  public function see($varx)
-  {
-    echo var_dump($varx);
-  }
-}
 
 Class CacheVar
 { # A different class should provide this utility to views.
 
-  public static function save($arr_arg)
+  public static function save(array $arr_arg)
   {
     $filename = dirname(__DIR__).'/cache_var/store.json';
 
@@ -35,20 +28,11 @@ Class CacheVar
       fclose($json_cache);
     }
   }
-  public static function load($key)
+  public static function load(): \stdClass
   {
     $filename = dirname(__DIR__).'/cache_var/store.json';
 
     $cache = json_decode(file_get_contents($filename));
-    foreach ($cache as $ckey => $cvalue) {
-      if($ckey == $key)
-      {
-        return $cvalue;
-      }
-      else
-      {
-        return False;
-      }
-    }
+    return $cache;
   }
 }

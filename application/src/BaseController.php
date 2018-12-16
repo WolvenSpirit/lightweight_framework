@@ -1,7 +1,7 @@
 <?php
 namespace Application\Source;
-include 'Litecore.php';
-use Application\Source\Litecore;
+include 'CacheVar.php';
+use Application\Source\CacheVar;
 # session_start();
 
 class BaseController extends CacheVar # if it implements an interface it can no longer be used without instance.
