@@ -1,0 +1,93 @@
+body{
+    background-color: #d9fff2;
+    font-family: 'Thasadith', sans-serif;
+}
+
+#header{
+    font-family: 'Major Mono Display', monospace;
+    background-color: darkslategrey;
+    color:white;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+    transition: ease-in-out .3s;
+    box-shadow: darkslategrey 1px 1px 10px 9px;
+}
+#header:hover{
+    font-family: 'Major Mono Display', monospace;
+    background-color: darkslategrey;
+    color:white;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+    padding-top: 1em;
+    box-shadow: darkslategrey 1px 1px 10px 9px;
+}
+#link{
+    text-decoration: none;
+    color:white;
+    font-size: 1em;
+    padding-left: .5em;
+    padding-right: .5em;
+    padding-bottom: .1em;
+    padding-top: .5em;
+    transition: ease-in-out .3s;
+}
+#link:hover{
+    text-decoration: none;
+
+    text-shadow: black 13px 20px 1px;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+    color:white;
+}
+#section{
+    margin: 1em;
+    padding: 1em;
+    background-color: rgba(255,255,255,30%);;
+    transition: ease-in-out .9s;
+    text-align-last: auto;
+}
+#section:hover{
+    padding: 1.3em;
+    background-color:rgba(255,255,255,90%);
+    border-radius: 1em;
+    box-shadow: rgba(211, 211, 211, 0.329) 1px 1px 10px 15px;
+    font-weight: bold;
+}
+#item-p{
+    font-size: 1em;
+}
+#side-tag{
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-bottom-left-radius: 2em;
+  background-color: rgba(255,0,0,30%);
+  font-size: .3em;
+  color:white;
+  font-weight: bolder;
+  transition: ease-in-out .9s;
+  padding: 1em;
+}
+#side-tag:hover{
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-bottom-left-radius: 2em;
+  background-color: red;
+  color:yellow;
+  font-size: 1.3em;
+  font-weight: bolder;
+  padding: 1em;
+  padding-bottom: 1em;
+  box-shadow: red 1px 1px 10px 9px;
+}
+#scrollWrap{
+  overflow: scroll;
+  scroll-behavior: smooth;
+  max-height: 500px;
+}
+#scrollWrap:hover{
+  overflow: scroll;
+  scroll-behavior: smooth;
+  max-height: 500px;
+}
