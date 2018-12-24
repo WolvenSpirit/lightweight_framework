@@ -7,7 +7,7 @@ Class CacheVar
 
   public static function save(array $arr_arg)
   {
-    $filename = dirname(__DIR__).'/cache_var/store.json';
+    $filename = '../application/cache_var/store.json';
 
     if(is_file($filename))
     {
@@ -30,7 +30,7 @@ Class CacheVar
   }
   public static function load(): \stdClass
   {
-    $filename = dirname(__DIR__).'/cache_var/store.json';
+    $filename = '../../application/cache_var/store.json';
 
     $cache = json_decode(file_get_contents($filename));
     return $cache;

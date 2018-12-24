@@ -24,7 +24,7 @@ class RouterClass
   foreach ($route as $route_key => $action)
     {
      $class_select = $action[0];
-     $controller_full_path = dirname(__DIR__).'/controllers/'.$class_select.'.php';
+     $controller_full_path = '../application/controllers/'.$class_select.'.php';
      $method = $action[1];
 
      require_once($controller_full_path);

@@ -6,7 +6,8 @@
   <?php
   # Main entry point.
   # load src
-  require dirname(__DIR__).'/application/src/Init.php';
+  require '../cfg.php';
+  require APP_BASEROOT.'application/src/Init.php';
 ?>
   </div>
 </html>

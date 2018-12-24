@@ -1,7 +1,8 @@
 <?php
 namespace Application\Test;
-require_once '/home/wolven/Desktop/ws_fw_php/vendor/autoload.php';
-require_once '/home/wolven/Desktop/ws_fw_php/application/models/mycrud.php';
+require './cfg.php';
+require_once APP_BASEROOT.'vendor/autoload.php';
+require_once APP_BASEROOT.'application/models/mycrud.php';
 use \PHPUnit\Framework\TestCase;
 
 class mycrudTest extends TestCase
@@ -17,7 +18,7 @@ class mycrudTest extends TestCase
   {
     $this->x = new \Application\Model\mycrud();
     $this->x->init();
-    $z = $this->x->select(['title'=>'Lorem']);
+    $z = $this->x->select(['title'=>'foo']);
     $this->assertInternalType('array',$z);
     $this->assertNotEmpty($z);
   }
@@ -42,14 +43,14 @@ class mycrudTest extends TestCase
   {
     $this->x = new \Application\Model\mycrud();
     $this->x->init();
-    $result = $this->x->select(array('title'=>'Lorem')); # Replace with existing column in your database.
+    $result = $this->x->select(array('title'=>'foo')); # Replace with existing column in your database.
     $this->assertInternalType('array',$result);
   }
   public function testTableSelectReturnedArrayNotEmpty()
   {
     $this->x = new \Application\Model\mycrud();
     $this->x->init();
-    $result = $this->x->select(array('title'=>'Lorem')); # Replace with existing column in your database.# Not very dry...
+    $result = $this->x->select(array('title'=>'foo')); # Replace with existing column in your database.# Not very dry...
     $this->assertNotEmpty($result);
   }
   public function testModelInsertsDataIntoDatabaseMysql()

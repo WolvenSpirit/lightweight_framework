@@ -3,7 +3,7 @@ namespace Application\Source;
 session_start();
 
 $_SESSION['app'] = "Hosted in LiteCorePHP powered by PHP ".phpversion();
-$_SESSION['cache'] = dirname(__DIR__)."/src/loadcache.php";
+$_SESSION['cache'] = "../application/src/loadcache.php";
 /*
 * Load all files with utility classes to be extended or instantiated.
 */

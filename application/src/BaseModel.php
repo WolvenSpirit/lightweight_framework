@@ -17,7 +17,7 @@ namespace Application\Source;
   {
 
     try {
-      $this->cfg = json_decode(file_get_contents("/home/wolven/Desktop/ws_fw_php/application/db_config.json"));
+      $this->cfg = json_decode(file_get_contents("./application/db_config.json"));
       if($this->cfg !=null)
       {
         return True;
@@ -53,7 +53,7 @@ namespace Application\Source;
     switch($this->cfg->connection->driver)
     {
         case 'mysql' || 'mysqli':
-          require_once(dirname(__DIR__).'/src/db_con/PDO_conn_mysql.php');
+          require_once('./application/src/db_con/PDO_conn_mysql.php');
           try{
           $this->con_object = new $this->driver_classes['mysql_class']($this->cfg);
           return True;

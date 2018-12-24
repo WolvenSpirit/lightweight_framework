@@ -11,7 +11,7 @@ class BaseController extends CacheVar # if it implements an interface it can no 
   {
     try
     {
-        require dirname(__DIR__)."/views/".$view;
+        require "../application/views/".$view;
         if(null!==$data)
         {
           if(is_array($data))

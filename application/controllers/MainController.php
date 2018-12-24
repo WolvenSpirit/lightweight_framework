@@ -1,7 +1,8 @@
 <?php
 namespace Application\Controller;
-include dirname(__DIR__).'/src/BaseController.php';
-include dirname(__DIR__).'/models/mycrud.php';
+require '../cfg.php';
+include APP_BASEROOT.'application/src/BaseController.php';
+include APP_BASEROOT.'application/models/mycrud.php';
 use Application\Source\BaseController;
 use Application\Model\mycrud;
 
